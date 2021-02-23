@@ -14,5 +14,6 @@ public class BasicPage {
 		this.driver = driver;
 		this.waiter = waiter;
 		this.js = (JavascriptExecutor) driver;
+
 	}
 }

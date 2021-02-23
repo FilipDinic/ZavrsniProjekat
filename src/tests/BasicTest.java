@@ -8,6 +8,8 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,7 +28,6 @@ import pages.LoginPage;
 import pages.MealPage;
 import pages.NotificationSistemPage;
 import pages.ProfilePage;
-import pages.SearchResultPage;
 
 public abstract class BasicTest {
 
@@ -41,7 +42,9 @@ public abstract class BasicTest {
 	protected MealPage mealPage;
 	protected NotificationSistemPage notificationSistemPage;
 	protected ProfilePage profilePage;
-	protected SearchResultPage searchResultPage;
+	protected String baseURL = "http://demo.yo-meals.com";
+	protected String Email = "customer@dummyid.com";
+	protected String Pass = "12345678a";
 
 	@BeforeClass
 	public void setup() {
@@ -57,21 +60,24 @@ public abstract class BasicTest {
 		this.mealPage = new MealPage(driver, waiter, js);
 		this.notificationSistemPage = new NotificationSistemPage(driver, waiter, js);
 		this.profilePage = new ProfilePage(driver, waiter, js);
-		this.searchResultPage = new SearchResultPage(driver, waiter, js);
 
 		this.driver.manage().window().maximize();
-		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		this.driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		this.driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 	}
 
 	@AfterMethod
 	public void takeScreenshot(ITestResult result) throws HeadlessException, AWTException, IOException {
+		String testTime = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss'.jpg'").format(new Date());
 		if (ITestResult.FAILURE == result.getStatus()) {
 			BufferedImage screenshoot = new Robot()
 					.createScreenCapture((new Rectangle(Toolkit.getDefaultToolkit().getScreenSize())));
 			File screenshot = new File("screenshot.jpg");
-			ImageIO.write(screenshoot, "jpg", new File("screenshots\\picture3.jpg"));
+			ImageIO.write(screenshoot, "jpg", new File("screenshots\\" + testTime));
 		}
+
+		this.driver.manage().deleteAllCookies();
+		this.driver.navigate().refresh();
 	}
 
 	@AfterClass

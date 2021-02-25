@@ -104,11 +104,11 @@ public class ProfilePage extends BasicPage {
 		this.getPhone().sendKeys(phone);
 		this.getZip().sendKeys(zipCode);
 		this.getCountry().selectByVisibleText(country);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		this.getState().selectByVisibleText(state);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		this.getCity().selectByVisibleText(city);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		this.getSaveButton().submit();
 
 	}

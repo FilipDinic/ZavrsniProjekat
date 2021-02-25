@@ -56,8 +56,9 @@ public class LocationPopupPage extends BasicPage {
 
 	}
 
-	public void closePopUp() {
+	public void closePopUp() throws InterruptedException {
 		this.getCloseElement().click();
+		Thread.sleep(2000);
 
 	}
 }

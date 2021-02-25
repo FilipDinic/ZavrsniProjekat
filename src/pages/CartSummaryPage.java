@@ -18,7 +18,7 @@ public class CartSummaryPage extends BasicPage {
 
 	}
 
-	public void clearAll() {
+	public void clearAll() throws InterruptedException {
 		this.getClearAllButton().click();
 
 	}

@@ -83,5 +83,6 @@ public abstract class BasicTest {
 	@AfterClass
 	public void clean() {
 		this.driver.quit();
+
 	}
 }

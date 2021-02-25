@@ -69,7 +69,7 @@ public class MealItemTest extends BasicTest {
 
 		locationPopupPage.setLocationName("City Center - Albany");
 
-		File file = new File("data/data.xlsx");
+		File file = new File("data/Data.xlsx");
 		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
 		XSSFSheet sheet = wb.getSheet("Meals");

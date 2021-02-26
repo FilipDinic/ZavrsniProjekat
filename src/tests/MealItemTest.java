@@ -7,56 +7,56 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class MealItemTest extends BasicTest {
 
+	SoftAssert SoftA = new SoftAssert();
+
 	@Test(priority = 5)
 	public void addMealToCartTest() throws Exception {
 
-		this.driver.get(baseURL + "/meal/lobster-shrimp-chicken-quesadilla-combo");
+		driver.navigate().to(baseURL + "/meal/lobster-shrimp-chicken-quesadilla-combo");
 
 		locationPopupPage.closePopUp();
 
 		mealPage.addMealToCart(5);
 
 		String errorMessage = notificationSistemPage.notificationMessage();
-		Assert.assertEquals(errorMessage, "The Following Errors Occurred:" + "\n" + "Please Select Location",
-				"[ERROR] Error message not exist!");
+		SoftA.assertTrue(errorMessage.contains("The Following Errors Occurred:"), "[ERROR] Error message not exist!");
 		notificationSistemPage.notificationDisappear();
 
 		locationPopupPage.selectLocation();
 		locationPopupPage.setLocationName("City Center - Albany");
 
-		mealPage.addMealToCart(4);
+		mealPage.addMealToCart(3);
 
 		String mealAddedToCart = notificationSistemPage.notificationMessage();
-		Assert.assertEquals(mealAddedToCart, "Meal Added To Cart", "[ERROR] Meal is not added to cart!");
+		SoftA.assertTrue(mealAddedToCart.contains("Meal Added To Cart"), "[ERROR] Meal is not added to cart!");
 
 	}
 
 	@Test(priority = 10)
 	public void addMealToFavorite() throws Exception {
 
-		this.driver.get(baseURL + "/meal/lobster-shrimp-chicken-quesadilla-combo");
+		driver.navigate().to(baseURL + "/meal/lobster-shrimp-chicken-quesadilla-combo");
 
 		locationPopupPage.closePopUp();
 
 		mealPage.addMealFavorite();
 
 		String pleaseLogin = notificationSistemPage.notificationMessage();
-		Assert.assertEquals(pleaseLogin, "Please login first!", "[ERROR] Login Failed!");
+		SoftA.assertTrue(pleaseLogin.contains("Please login first!"), "[ERROR] Login Failed!");
 
-		this.driver.get(baseURL + "/guest-user/login-form");
+		driver.get(baseURL + "/guest-user/login-form");
 		loginPage.login(Email, Pass);
 
-		this.driver.get(baseURL + "/meal/lobster-shrimp-chicken-quesadilla-combo");
+		driver.get(baseURL + "/meal/lobster-shrimp-chicken-quesadilla-combo");
 		mealPage.addMealFavorite();
 
 		String productAddToFavourite = notificationSistemPage.notificationMessage();
-		Assert.assertEquals(productAddToFavourite, "Product has been added to your favorites.",
+		SoftA.assertTrue(productAddToFavourite.contains("Product has been added to your favorites."),
 				"[ERROR] Product is not added to favorite!");
 
 	}
@@ -64,7 +64,7 @@ public class MealItemTest extends BasicTest {
 	@Test(priority = 15)
 	public void clearCartTest() throws Exception {
 
-		this.driver.get(baseURL + "/meals");
+		driver.navigate().to(baseURL + "/meals");
 		SoftAssert SoftA = new SoftAssert();
 
 		locationPopupPage.setLocationName("City Center - Albany");
@@ -80,7 +80,7 @@ public class MealItemTest extends BasicTest {
 			XSSFCell mealUrlSheet = row.getCell(0);
 			String mealUrl = mealUrlSheet.getStringCellValue();
 
-			this.driver.get(mealUrl);
+			driver.navigate().to(mealUrl);
 
 			mealPage.addMealToCart(3);
 
@@ -93,7 +93,8 @@ public class MealItemTest extends BasicTest {
 		cartSummaryPage.clearAll();
 
 		String removeAll = notificationSistemPage.notificationMessage();
-		Assert.assertEquals(removeAll, "All meals removed from Cart successfully", "[ERROR] Meals are not removed!");
+		SoftA.assertTrue(removeAll.contains("All meals removed from Cart successfully"),
+				"[ERROR] Meals are not removed!");
 
 		fis.close();
 		wb.close();

@@ -28,6 +28,7 @@ import pages.LoginPage;
 import pages.MealPage;
 import pages.NotificationSistemPage;
 import pages.ProfilePage;
+import pages.SearchResultPage;
 
 public abstract class BasicTest {
 
@@ -42,6 +43,7 @@ public abstract class BasicTest {
 	protected MealPage mealPage;
 	protected NotificationSistemPage notificationSistemPage;
 	protected ProfilePage profilePage;
+	protected SearchResultPage searchResultPage;
 	protected String baseURL = "http://demo.yo-meals.com";
 	protected String Email = "customer@dummyid.com";
 	protected String Pass = "12345678a";

@@ -30,13 +30,12 @@ public class MealPage extends BasicPage {
 
 	}
 
-	public void addMealToCart(int quan) throws InterruptedException {
+	public void addMealToCart(int quan) {
 		String quantity = String.valueOf(quan);
 		this.getQuantityInput().sendKeys(Keys.CONTROL, "a");
+		this.getQuantityInput().sendKeys(Keys.DELETE);
 		this.getQuantityInput().sendKeys(quantity);
-		Thread.sleep(2000);
 		this.getAddToCart().click();
-		Thread.sleep(2000);
 
 	}
 

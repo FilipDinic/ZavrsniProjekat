@@ -17,13 +17,12 @@ public class SearchResultPage extends BasicPage {
 	}
 
 	public List<WebElement> searchResult() {
-		List<WebElement> result = this.driver.findElements(By.xpath("//*[@class='product-name']/a"));
-		return result;
+		return this.driver.findElements(By.xpath("//*[@class='product-name']/a"));
 
 	}
 
-	public List<String> nameOfMeals() {
-		List<String> meals = new ArrayList<String>();
+	public ArrayList<String> nameOfMeals() {
+		ArrayList<String> meals = new ArrayList<String>();
 		for (int i = 0; i < this.searchResult().size(); i++) {
 			String result = this.searchResult().get(i).getText();
 			meals.add(result);

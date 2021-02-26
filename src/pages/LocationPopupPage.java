@@ -43,8 +43,9 @@ public class LocationPopupPage extends BasicPage {
 
 	}
 
-	public void selectLocation() {
+	public void selectLocation() throws InterruptedException {
 		this.getSelectLocation().click();
+		Thread.sleep(2000);
 
 	}
 

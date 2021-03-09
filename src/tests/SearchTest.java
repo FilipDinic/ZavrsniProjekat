@@ -17,7 +17,7 @@ public class SearchTest extends BasicTest {
 
 		driver.navigate().to(baseURL + "/meals");
 
-		locationPopupPage.setLocationName("City Center - Albany");
+		lpp.setLocationName("City Center - Albany");
 
 		File file = new File("data/Data.xlsx");
 		FileInputStream fis = new FileInputStream(file);
@@ -28,25 +28,25 @@ public class SearchTest extends BasicTest {
 
 			XSSFRow row = sheet.getRow(i);
 
-			locationPopupPage.selectLocation();
+			lpp.selectLocation();
 
 			String Location = row.getCell(0).getStringCellValue();
 
-			locationPopupPage.setLocationName(Location);
+			lpp.setLocationName(Location);
 
 			String urlFromSheet = row.getCell(1).getStringCellValue();
 			driver.navigate().to(urlFromSheet);
 
 			int resultCount = (int) row.getCell(2).getNumericCellValue();
 
-			SoftA.assertEquals(searchResultPage.numberOfMeals(), resultCount,
+			SoftA.assertEquals(srp.numberOfMeals(), resultCount,
 					"[ERROR] Number of results is not the same!");
 
 			for (int j = 3; j < 3 + row.getCell(2).getNumericCellValue(); j++) {
 
 				String result = row.getCell(j).getStringCellValue();
 
-				SoftA.assertTrue((searchResultPage.nameOfMeals().get(j - 3)).contains(result),
+				SoftA.assertTrue((srp.nameOfMeals().get(j - 3)).contains(result),
 						"[ERROR] The order of the results is not the same!");
 
 			}

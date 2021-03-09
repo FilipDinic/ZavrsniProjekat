@@ -19,20 +19,20 @@ public class MealItemTest extends BasicTest {
 
 		driver.navigate().to(baseURL + "/meal/lobster-shrimp-chicken-quesadilla-combo");
 
-		locationPopupPage.closePopUp();
+		lpp.closePopUp();
 
-		mealPage.addMealToCart(5);
+		mp.addMealToCart(5);
 
-		String errorMessage = notificationSistemPage.notificationMessage();
+		String errorMessage = nsp.notificationMessage();
 		SoftA.assertTrue(errorMessage.contains("The Following Errors Occurred:"), "[ERROR] Error message not exist!");
-		notificationSistemPage.notificationDisappear();
+		nsp.notificationDisappear();
 
-		locationPopupPage.selectLocation();
-		locationPopupPage.setLocationName("City Center - Albany");
+		lpp.selectLocation();
+		lpp.setLocationName("City Center - Albany");
 
-		mealPage.addMealToCart(3);
+		mp.addMealToCart(3);
 
-		String mealAddedToCart = notificationSistemPage.notificationMessage();
+		String mealAddedToCart = nsp.notificationMessage();
 		SoftA.assertTrue(mealAddedToCart.contains("Meal Added To Cart"), "[ERROR] Meal is not added to cart!");
 
 	}
@@ -42,20 +42,20 @@ public class MealItemTest extends BasicTest {
 
 		driver.navigate().to(baseURL + "/meal/lobster-shrimp-chicken-quesadilla-combo");
 
-		locationPopupPage.closePopUp();
+		lpp.closePopUp();
 
-		mealPage.addMealFavorite();
+		mp.addMealFavorite();
 
-		String pleaseLogin = notificationSistemPage.notificationMessage();
+		String pleaseLogin = nsp.notificationMessage();
 		SoftA.assertTrue(pleaseLogin.contains("Please login first!"), "[ERROR] Login Failed!");
 
 		driver.get(baseURL + "/guest-user/login-form");
-		loginPage.login(Email, Pass);
+		lp.login(Email, Pass);
 
 		driver.get(baseURL + "/meal/lobster-shrimp-chicken-quesadilla-combo");
-		mealPage.addMealFavorite();
+		mp.addMealFavorite();
 
-		String productAddToFavourite = notificationSistemPage.notificationMessage();
+		String productAddToFavourite = nsp.notificationMessage();
 		SoftA.assertTrue(productAddToFavourite.contains("Product has been added to your favorites."),
 				"[ERROR] Product is not added to favorite!");
 
@@ -67,7 +67,7 @@ public class MealItemTest extends BasicTest {
 		driver.navigate().to(baseURL + "/meals");
 		SoftAssert SoftA = new SoftAssert();
 
-		locationPopupPage.setLocationName("City Center - Albany");
+		lpp.setLocationName("City Center - Albany");
 
 		File file = new File("data/Data.xlsx");
 		FileInputStream fis = new FileInputStream(file);
@@ -82,17 +82,17 @@ public class MealItemTest extends BasicTest {
 
 			driver.navigate().to(mealUrl);
 
-			mealPage.addMealToCart(3);
+			mp.addMealToCart(3);
 
-			SoftA.assertEquals(notificationSistemPage.notificationMessage(), "Meal Added To Cart",
+			SoftA.assertEquals(nsp.notificationMessage(), "Meal Added To Cart",
 					"[ERROR] Cart is empty!");
 		}
 
 		SoftA.assertAll();
 
-		cartSummaryPage.clearAll();
+		csp.clearAll();
 
-		String removeAll = notificationSistemPage.notificationMessage();
+		String removeAll = nsp.notificationMessage();
 		SoftA.assertTrue(removeAll.contains("All meals removed from Cart successfully"),
 				"[ERROR] Meals are not removed!");
 

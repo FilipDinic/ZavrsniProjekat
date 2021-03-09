@@ -29,7 +29,7 @@ public class LoginPage extends BasicPage {
 		this.getEmail().sendKeys(email);
 		this.getPassword().clear();
 		this.getPassword().sendKeys(password);
-		this.getPassword().sendKeys(Keys.ENTER);
+		this.driver.findElement(By.name("btn_submit")).click();
 
 	}
 }

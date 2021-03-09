@@ -36,14 +36,14 @@ public abstract class BasicTest {
 	protected WebDriverWait waiter;
 	protected JavascriptExecutor js;
 
-	protected AuthPage authPage;
-	protected CartSummaryPage cartSummaryPage;
-	protected LocationPopupPage locationPopupPage;
-	protected LoginPage loginPage;
-	protected MealPage mealPage;
-	protected NotificationSistemPage notificationSistemPage;
-	protected ProfilePage profilePage;
-	protected SearchResultPage searchResultPage;
+	protected AuthPage ap;
+	protected CartSummaryPage csp;
+	protected LocationPopupPage lpp;
+	protected LoginPage lp;
+	protected MealPage mp;
+	protected NotificationSistemPage nsp;
+	protected ProfilePage pp;
+	protected SearchResultPage srp;
 	protected String baseURL = "http://demo.yo-meals.com";
 	protected String Email = "customer@dummyid.com";
 	protected String Pass = "12345678a";
@@ -55,13 +55,13 @@ public abstract class BasicTest {
 		this.driver = new ChromeDriver();
 		this.waiter = new WebDriverWait(driver, 30);
 		this.js = (JavascriptExecutor) driver;
-		this.authPage = new AuthPage(driver, waiter, js);
-		this.cartSummaryPage = new CartSummaryPage(driver, waiter, js);
-		this.locationPopupPage = new LocationPopupPage(driver, waiter, js);
-		this.loginPage = new LoginPage(driver, waiter, js);
-		this.mealPage = new MealPage(driver, waiter, js);
-		this.notificationSistemPage = new NotificationSistemPage(driver, waiter, js);
-		this.profilePage = new ProfilePage(driver, waiter, js);
+		this.ap = new AuthPage(driver, waiter, js);
+		this.csp = new CartSummaryPage(driver, waiter, js);
+		this.lpp = new LocationPopupPage(driver, waiter, js);
+		this.lp = new LoginPage(driver, waiter, js);
+		this.mp = new MealPage(driver, waiter, js);
+		this.nsp = new NotificationSistemPage(driver, waiter, js);
+		this.pp = new ProfilePage(driver, waiter, js);
 
 		this.driver.manage().window().maximize();
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

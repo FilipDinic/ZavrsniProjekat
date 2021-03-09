@@ -12,20 +12,20 @@ public class ProfileTest extends BasicTest {
 
 		driver.navigate().to(baseURL + "/guest-user/login-form");
 
-		locationPopupPage.closePopUp();
+		lpp.closePopUp();
 
-		loginPage.login(Email, Pass);
-		String logInMessage = notificationSistemPage.notificationMessage();
+		lp.login(Email, Pass);
+		String logInMessage = nsp.notificationMessage();
 		SoftA.assertTrue(logInMessage.contains("Login Successfull"), "[ERROR] Login Failed!");
 		
 		driver.navigate().to(baseURL + "/member/profile");
-		profilePage.updateProfile("Filip", "Dinic", "Bore Vukmirovica 32", "063415184", "18000", "United Kingdom",
+		pp.updateProfile("Filip", "Dinic", "Bore Vukmirovica 32", "063415184", "18000", "United Kingdom",
 				"Bristol", "Avon");
-		String setMessage = notificationSistemPage.notificationMessage();
+		String setMessage = nsp.notificationMessage();
 		SoftA.assertTrue(setMessage.contains("Setup Successful"), "[ERROR] Profile not updated!");
 
-		authPage.logoutAccount();
-		String logOutMessage = notificationSistemPage.notificationMessage();
+		ap.logoutAccount();
+		String logOutMessage = nsp.notificationMessage();
 		SoftA.assertTrue(logOutMessage.contains("Logout Successfull!"), "[ERROR] Login Failed!");
 
 	}
@@ -35,26 +35,26 @@ public class ProfileTest extends BasicTest {
 
 		driver.navigate().to(baseURL + "/guest-user/login-form");
 
-		locationPopupPage.closePopUp();
+		lpp.closePopUp();
 
-		loginPage.login(Email, Pass);
-		String logInMessage = notificationSistemPage.notificationMessage();
+		lp.login(Email, Pass);
+		String logInMessage = nsp.notificationMessage();
 		SoftA.assertTrue(logInMessage.contains("Login Successfull"), "[ERROR] Login Failed!");
 
 		driver.navigate().to(baseURL + "/member/profile");
 
-		profilePage.uploadImage();
-		String imageUploaded = notificationSistemPage.notificationMessage();
+		pp.uploadImage();
+		String imageUploaded = nsp.notificationMessage();
 		SoftA.assertTrue(imageUploaded.contains("Profile Image Uploaded Successfully"), "[ERROR] Profile image not updated!");
-		notificationSistemPage.notificationDisappear();
+		nsp.notificationDisappear();
 
-		profilePage.deleteImage();
-		String delImage = notificationSistemPage.notificationMessage();
+		pp.deleteImage();
+		String delImage = nsp.notificationMessage();
 		SoftA.assertTrue(delImage.contains("Profile Image Deleted Successfully"), "[ERROR] Profile image not deleted!");
-		notificationSistemPage.notificationDisappear();
+		nsp.notificationDisappear();
 
-		authPage.logoutAccount();
-		String logOutMessage = notificationSistemPage.notificationMessage();
+		ap.logoutAccount();
+		String logOutMessage = nsp.notificationMessage();
 		SoftA.assertTrue(logOutMessage.contains("Logout Successfull!"), "[ERROR] Logout Failed!");
 
 	}
